@@ -38,12 +38,10 @@ struct LandingItemView: View {
                 .foregroundColor(theme.titleColor)
                 .multilineTextAlignment(.center)
             
-            if let description = page.description {
-                Text(description)
-                    .font(.system(size: 16))
-                    .foregroundColor(theme.descriptionColor)
-                    .multilineTextAlignment(.center)
-            }
+            Text(page.description)
+                .font(.system(size: 16))
+                .foregroundColor(theme.descriptionColor)
+                .multilineTextAlignment(.center)
         }
         .padding(.top, 48)
     }

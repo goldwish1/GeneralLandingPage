@@ -81,3 +81,70 @@ import GeneralLandingPage
 
 ---
 
+_**User**_
+
+请帮我修改这个问题。然后确认下当前我们的用户这样导入package是正确的吗？
+
+---
+
+_**Assistant**_
+
+我看到您的 Package.swift 中确实需要修改。让我先修改配置：
+
+---
+
+```diff
+          .library(
+              name: "GeneralLandingPage",
+-             type: .dynamic,
+              targets: ["GeneralLandingPage"]),
+      ],
+```
+
+---
+
+关于用户导入包的问题，让我检查一下项目结构：
+
+---
+
+<details>
+            <summary>Listed directory Sources • **1** results</summary>
+        
+| Name |
+|-------|
+| 📁 `GeneralLandingPage` |
+
+</details>
+
+---
+
+<details>
+            <summary>Listed directory Sources/GeneralLandingPage • **4** results</summary>
+        
+| Name |
+|-------|
+| 📁 `Utils` |
+| 📁 `Views` |
+| 📁 `ViewModels` |
+| 📁 `Models` |
+
+</details>
+
+---
+
+是的，目前的项目结构是正确的，用户可以通过以下方式使用这个包：
+
+1. 在 Xcode 项目中添加包：
+```swift
+File > Add Packages > 输入：https://github.com/goldwish1/GeneralLandingPage.git
+```
+
+2. 在代码中导入：
+```swift
+import GeneralLandingPage
+```
+
+这种导入方式
+
+---
+
