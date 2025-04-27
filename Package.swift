@@ -12,14 +12,14 @@ let package = Package(
             type: .dynamic,
             targets: ["GeneralLandingPage"]),
     ],
+    // 第三方依赖项
     dependencies: [],
+    
+    // 目标配置
     targets: [
+        // 主要目标
         .target(
-            name: "GeneralLandingPage",
-            path: "Sources/GeneralLandingPage",
-            resources: [
-                .process("Resources")
-            ]
+            name: "GeneralLandingPage"
         ),
         .testTarget(
             name: "GeneralLandingPageTests",

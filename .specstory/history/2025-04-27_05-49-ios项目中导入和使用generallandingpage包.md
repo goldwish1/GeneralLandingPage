@@ -533,6 +533,191 @@ _**User**_
 
 _**Assistant**_
 
+不是的。从截图来看，您现在是在一个名为"test"的项目中尝试添加package依赖。这是在使用方（客户端项目）的角度在添加依赖。
+
+我建议按以下步骤操作：
+
+1. **先关闭当前的test项目**
+
+2. **创建新的release**：
+   - 回到我们的GeneralLandingPage仓库
+   - 删除现有的"1.0.0" release
+   - 创建新的release，使用标准版本号格式 "v1.0.0"
+
+3. **然后在客户端项目中添加依赖**：
+   - 重新打开您的test项目
+   - 选择 File > Add Package Dependencies...
+   - 输入完整的URL：`https://github.com/goldwish1/GeneralLandingPage.git`
+   - 选择版本规则（Version）：选择 "Up to Next Major Version"
+   - 选择最小版本：v1.0.0
+
+这样的流程更清晰：
+1. 先确保package发布正确
+2. 再在使用方项目中添加依赖
+
+您要我指导您如何创建新的release吗？或者您想先尝试自己操作？
+
+---
+
+_**User**_
+
+我们已经在github上创建并发布了这个release，但是测试项目导入时仍然导入失败，请帮我确认原因并告诉我详细的排查步骤
+
+---
+
+_**Assistant**_
+
+<details>
+            <summary>Searched codebase "Package.swift内容" • **25** results</summary>
+        
+| File | Lines |
+|------|-------|
+| `Package.swift` | L1-29 |
+| `README.md` | L1-90 |
+| `Examples/BasicExample/BasicExampleApp.swift` | L1-67 |
+| `Examples/BasicExample/BasicExampleApp.swift` | L67-84 |
+| `Sources/GeneralLandingPage/Models/LandingPageData.swift` | L1-71 |
+| `Sources/GeneralLandingPage/Models/LandingConfiguration.swift` | L1-56 |
+| `Sources/GeneralLandingPage/Views/LandingPageView.swift` | L1-35 |
+| `Sources/GeneralLandingPage/ViewModels/LandingPageViewModel.swift` | L1-69 |
+| `Tests/GeneralLandingPageTests/TestUtils/LandingPageTestUtils.swift` | L1-64 |
+| `Sources/GeneralLandingPage/Utils/LandingAnimations.swift` | L67-87 |
+| `Sources/GeneralLandingPage/Views/LandingItemView.swift` | L1-63 |
+| `Sources/GeneralLandingPage/Utils/LandingAnimations.swift` | L1-67 |
+| `README.md` | L90-167 |
+| `Sources/GeneralLandingPage/Models/LandingConfiguration.swift` | L56-102 |
+| `Sources/GeneralLandingPage/Utils/LandingStorage.swift` | L1-54 |
+| `Sources/GeneralLandingPage/Views/PageIndicatorView.swift` | L1-38 |
+| `Sources/GeneralLandingPage/Utils/LandingStorage.swift` | L54-62 |
+| `Sources/GeneralLandingPage/Views/LandingPageView.swift` | L87-135 |
+| `Sources/GeneralLandingPage/Models/LandingPageData.swift` | L71-80 |
+| `Sources/GeneralLandingPage/Views/LandingPageView.swift` | L35-87 |
+| `Tests/GeneralLandingPageTests/Utils/LandingAnimationsTests.swift` | L1-72 |
+| `Sources/GeneralLandingPage/ViewModels/LandingPageViewModel.swift` | L69-145 |
+| `.swiftpm/xcode/xcuserdata/yuanzhou.feng.xcuserdatad/xcschemes/xcschememanagement.plist` | L1-15 |
+| `Tests/GeneralLandingPageTests/TestUtils/LandingPageTestUtils.swift` | L64-83 |
+| `Sources/GeneralLandingPage/ViewModels/LandingPageViewModel.swift` | L145-149 |
+
+</details>
+
+---
+
+<details>
+            <summary>Listed directory Sources/GeneralLandingPage • **4** results</summary>
+        
+| Name |
+|-------|
+| 📁 `Utils` |
+| 📁 `Views` |
+| 📁 `ViewModels` |
+| 📁 `Models` |
+
+</details>
+
+---
+
+Could not resolve URI: Error: 无法解析不存在的文件 '/Users/yuanzhou.feng/Desktop/GeneralLandingPage/Sources/GeneralLandingPage/Resources'
+
+---
+
+根据我的检查，导入失败的主要原因和解决方案如下：
+
+### 问题原因：
+
+1. **Resources目录不存在**：
+   Package.swift中指定了一个Resources目录，但该目录实际上不存在。
+
+2. **Tag格式问题**：
+   虽然创建了新的release，但可能GitHub需要一些时间进行索引。
+
+3. **Package.swift配置有误**：
+   Package.swift文件中有几处可能导致问题的配置。
+
+### 详细排查步骤：
+
+1. **修复Package.swift文件**：
+   - 移除不存在的Resources目录配置
+   - 使用标准库类型而非动态库类型
+
+   ```swift
+   // swift-tools-version: 5.9
+   import PackageDescription
+
+   let package = Package(
+       name: "GeneralLandingPage",
+       platforms: [
+           .iOS(.v16)
+       ],
+       products: [
+           .library(
+               name: "GeneralLandingPage",
+               targets: ["GeneralLandingPage"]),
+       ],
+       dependencies: [],
+       targets: [
+           .target(
+               name: "GeneralLandingPage"),
+           .testTarget(
+               name: "GeneralLandingPageTests",
+               dependencies: ["GeneralLandingPage"]),
+       ],
+       swiftLanguageVersions: [.v5]
+   )
+   ```
+
+2. **重新创建标准格式的Release**：
+   - 删除所有现有releases
+   - 创建新的tag，使用标准格式：`v1.0.0`
+   - 发布新的release
+
+3. **清除本地缓存**：
+   - 在终端中执行：`rm -rf ~/Library/Caches/org.swift.swiftpm/`
+   - 重启Xcode
+
+4. **确认URL格式**：
+   - 使用完整的URL：`https://github.com/goldwish1/GeneralLandingPage.git`
+   - URL末尾必须有`.git`
+
+5. **测试项目关闭并重新打开**：
+   - 完全关闭测试项目
+   - 重新打开
+   - 尝试添加package
+
+6. **最后，如果还有问题**：
+   - 尝试在另一个新的空白iOS项目中添加此package
+   - 这可以验证问题是否与test项目本身有关
+
+建议按照上述步骤逐一排查，最关键的修改是移除Package.swift中不存在的Resources目录配置，这很可能是导致问题的主要原因。
+
+---
+
+_**User**_
+
+@Package.swift 请帮我移除
+
+---
+
+_**Assistant**_
+
+好的，我来帮您修改Package.swift文件，移除不存在的Resources配置。
+
+---
+
+```diff
+          // 主要目标
+          .target(
+-             name: "GeneralLandingPage", // 目标名称
+-             path: "Sources/GeneralLandingPage", // 源代码路径
+-             resources: [
+-                 .process("Resources") // 处理资源文件夹
+-             ]
++             name: "GeneralLandingPage"
+          ),
+          .testTarget(
+```
+
+---
+
 
 
 ---
