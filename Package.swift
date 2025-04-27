@@ -9,13 +9,21 @@ let package = Package(
     products: [
         .library(
             name: "GeneralLandingPage",
+            type: .dynamic,
             targets: ["GeneralLandingPage"]),
     ],
+    dependencies: [],
     targets: [
         .target(
-            name: "GeneralLandingPage"),
+            name: "GeneralLandingPage",
+            path: "Sources/GeneralLandingPage",
+            resources: [
+                .process("Resources")
+            ]
+        ),
         .testTarget(
             name: "GeneralLandingPageTests",
             dependencies: ["GeneralLandingPage"]),
-    ]
+    ],
+    swiftLanguageVersions: [.v5]
 ) 

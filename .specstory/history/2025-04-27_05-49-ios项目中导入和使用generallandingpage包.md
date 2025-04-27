@@ -447,6 +447,92 @@ _**User**_
 
 _**Assistant**_
 
+让我检查一下当前的目录结构。
+
+---
+
+<details>
+            <summary>Listed current directory • **9** results</summary>
+        
+| Name |
+|-------|
+| 📁 `.git` |
+| 📄 `README.md` |
+| 📁 `.swiftpm` |
+| 📄 `.cursorindexingignore` |
+| 📁 `.specstory` |
+| 📁 `Tests` |
+| 📁 `Sources` |
+| 📄 `Package.swift` |
+| 📁 `Examples` |
+
+</details>
+
+---
+
+让我们进一步检查Sources和Tests目录的结构：
+
+---
+
+<details>
+            <summary>Listed directory Sources • **1** results</summary>
+        
+| Name |
+|-------|
+| 📁 `GeneralLandingPage` |
+
+</details>
+
+---
+
+<details>
+            <summary>Listed directory Tests • **1** results</summary>
+        
+| Name |
+|-------|
+| 📁 `GeneralLandingPageTests` |
+
+</details>
+
+---
+
+目录结构是完全正确的！符合Swift Package的标准结构：
+
+```
+GeneralLandingPage/
+├── .git/
+├── .swiftpm/
+├── Package.swift
+├── README.md
+├── Sources/
+│   └── GeneralLandingPage/     ✅ 正确
+├── Tests/
+│   └── GeneralLandingPageTests/  ✅ 正确
+└── Examples/                    ✅ 示例代码目录
+```
+
+目录结构完全符合Swift Package的标准要求：
+1. 根目录有Package.swift文件
+2. Sources目录下有与包同名的GeneralLandingPage目录
+3. Tests目录下有与包对应的测试目录GeneralLandingPageTests
+4. 额外还有Examples目录用于示例代码，这是一个很好的实践
+
+目录结构没有问题，这不是导致包无法识别的原因。建议我们：
+1. 重新创建release，使用标准的版本号格式（v1.0.0）
+2. 确认Package.swift中的配置（之前提到的建议修改）
+
+您想先进行哪一步？
+
+---
+
+_**User**_
+
+我们是在这里添加package吗？
+
+---
+
+_**Assistant**_
+
 
 
 ---
