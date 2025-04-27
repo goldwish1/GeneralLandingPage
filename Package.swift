@@ -9,7 +9,6 @@ let package = Package(
     products: [
         .library(
             name: "GeneralLandingPage",
-            type: .dynamic,
             targets: ["GeneralLandingPage"]),
     ],
     // 第三方依赖项
