@@ -27,7 +27,7 @@ GeneralLandingPage 是一个用于创建 iOS 应用引导页的 Swift Package，
 在 Xcode 中，选择 File > Add Packages，然后输入以下地址：
 
 ```
-https://github.com/yourusername/GeneralLandingPage.git
+https://github.com/goldwish1/GeneralLandingPage
 ```
 
 ## 使用方法
