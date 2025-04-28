@@ -111,6 +111,32 @@ LandingStorage.shared.resetLandingPage(identifier: "app_v1")
 LandingStorage.shared.resetAllLandingPages()
 ```
 
+## 使用 Cursor AI 快速集成
+
+### 前置条件
+1. 确保已将 GeneralLandingPage package 添加到您的 Cursor 项目文件夹中
+2. 在 Xcode 中已经通过 SPM 成功导入了该包
+
+### 示例提示词
+如果您正在使用 Cursor AI，可以使用以下提示词快速完成集成：
+
+```
+这是我们之前项目做的一个landing组件，现在我们要为我们的IOS APP test1增加landing page，请参照示例项目进行适配，我们现在在我们IOS项目的根目录，我们需要：
+* 创建一个新的View来使用LandingPageView
+* 修改App的入口文件来集成这个Landing页面
+```
+
+Cursor AI 将帮助您：
+1. 创建适配您项目的 LandingPageView
+2. 在合适的位置集成引导页面
+3. 配置必要的参数和状态管理
+
+### 推荐的集成步骤
+1. 首先创建引导页面视图
+2. 配置引导页数据和主题
+3. 在 App 入口处添加状态管理
+4. 测试引导页显示逻辑
+
 ## 组件结构
 
 ### LandingPageData

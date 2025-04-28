@@ -144,7 +144,56 @@ File > Add Packages > 输入：https://github.com/goldwish1/GeneralLandingPage.g
 import GeneralLandingPage
 ```
 
-这种导入方式
+这种导入方式是完全正确的，因为：
+
+1. 我们的包结构符合 Swift Package Manager 的标准：
+   - 有正确的 `Package.swift` 配置
+   - 源代码位于 `Sources/GeneralLandingPage` 目录下
+   - 包名和模块名保持一致
+
+2. 我们已经在 `Package.swift` 中正确声明了产品：
+   ```swift
+   .library(
+       name: "GeneralLandingPage",
+       targets: ["GeneralLandingPage"]
+   )
+   ```
+
+3. 项目的目录结构也是标准的：
+   ```
+   Sources/
+     GeneralLandingPage/
+       Utils/
+       Views/
+       ViewModels/
+       Models/
+   ```
+
+建议您可以在 README.md 中补充一些使用示例，比如：
+
+1. 具体的集成步骤截图
+2. 最简单的使用示例代码
+3. 常见问题解答（FAQ）部分
+4. 版本兼容性说明
+
+需要我帮您补充这些内容到 README.md 中吗？
+
+---
+
+_**User**_
+
+@README.md 请把以下使用Cursor的指导提示词加入readme文档
+
+示例：【前置要求：把package加入cursor项目文件夹】
+这是我们之前项目做的一个landing组件，现在我们要为我们的IOS APP test1增加landing page，请参照示例项目进行适配，我们现在在我们IOS项目的根目录，我们需要
+* 创建一个新的View来使用LandingPageView
+* 修改App的入口文件来集成这个Landing页面
+
+---
+
+_**Assistant**_
+
+
 
 ---
 
